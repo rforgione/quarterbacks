@@ -1,7 +1,6 @@
 ### Quarterback Success Predictions
 
-This project aims to take data on NFL combine performance, and predict a college quarterback's success
-at the NFL level. 
+This project aims to take data on college performance and NFL combine metrics from college quarterbacks, and use them to predict success at the NFL level. 
 
 As of now, I will be using data from the following sources:
 * http://www.nflcombineresults.com
