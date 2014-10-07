@@ -2,6 +2,7 @@ import urllib2
 from bs4 import BeautifulSoup
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
 
 def scrub_data(url):
 	""" Takes NFL combine data from www.nflcombineresults.com and turns it into a 
@@ -12,12 +13,21 @@ def scrub_data(url):
 	page = url.read()
 	soup = BeautifulSoup(page, 'html5lib')
 
-	elems = [i.text for i in soup.tbody.find_all('div', {'align': 'center'})]
+	vec = np.array([i.text for i in soup.tbody.find_all('div', {'align': 'center'})]).reshape(-1,13)
 
-	vec = np.array(elems)
-
-	mat = vec.reshape(-1, 13)
-
-	return pd.DataFrame(mat, columns=['Year', 'Name', 'College', 'POS', 'Height.in', 'Weight.lbs', 
+	return pd.DataFrame(vec, columns=['Year', 'Name', 'College', 'POS', 'Height.in', 'Weight.lbs', 
 			   					      'Wonderlic', '40yd', 'Bench', 'Vert', 'BroadJump', 'Shuttle', '3cone'])
 
+
+def forty_yd_list(g):
+	g = [float(i) for i in [i for i in list(g['40yd']) if i != '' and '*' not in i]]
+
+	fig = plt.figure()
+	ax = fig.add_subplot(111)
+	ax.hist(g, 100, color='green', alpha=0.8)
+	ax.set_xlim(4, 6)
+	ax.set_xlabel('Time (s)')
+	ax.set_ylabel('Frequency')
+	ax.set_title("40-yard Dash Times - All Positions (NFL Combine)")
+	plt.xticks(np.arange(4,6,.15))
+	plt.show()
