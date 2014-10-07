@@ -10,7 +10,7 @@ I am using Python along with Pandas, NumPy, BeautifulSoup, and urllib2.
 
 The planned approach is as follows:
 1. Collect data
-2. Perform exploratory data analysis and vizualization
+2. Perform exploratory data analysis and visualization
 3. Encode dataset into a numerical data matrix that can be processed algorithmically
 4. Train a classification algorithm on this data where the combine data and college
 statistics are the features, and the output is some measure of success at the NFL level
